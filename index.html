@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cybernetics UI Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body>
+  <header class="mica-fixed-header">
+    <div class="mica-left glow-text mica-header-form">
+      <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">MAIN</button>
+    </div>
+    <div class="mica-right glow-text">
+      <form class="mica-header-form" onsubmit="event.preventDefault();">
+        <div><input type="text"></div>
+        <div><button type="submit">SEND</button></div>
+      </form>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <svg width="0" height="0">
+      <defs>
+        <filter id="glow-filter" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+    </svg>
+
+    <section id="mapsection" class="tizu">
+      
+      <h2>
+        <div id="dateTimeDisplay" class="glow-text"></div>
+      </h2>
+      <svg id="mapSvg" viewBox="0 0 400 270" width="100%" height="100%"></svg>
+    </section>
+
+    <section class="weatherPanel">
+      <p id="location">Click on map</p>
+      <p id="temp"></p>
+      <p id="condition"></p>
+      <p id="wind"></p>
+      <button id="toggleMode" class="auto-button">AUTO</button>
+
+      <svg width="0" height="0">
+        <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </svg>
+
+      <svg id="cyberGaugeHUD" viewBox="0 0 180 180" width="180" height="180">
+        <!-- 外側レイヤー -->
+        <g class="layer layer1">
+          <circle class="bg" cx="90" cy="90" r="54" />
+          <circle class="fg1" cx="90" cy="90" r="54" filter="url(#neonGlow)" />
+        </g>
+
+        <!-- 中央レイヤー（太め） -->
+        <g class="layer layer2">
+          <circle class="bg" cx="90" cy="90" r="48" />
+          <circle class="fg2" cx="90" cy="90" r="48" filter="url(#neonGlow)" />
+        </g>
+
+        <!-- 内側レイヤー -->
+        <g class="layer layer3">
+          <circle class="bg" cx="90" cy="90" r="42" />
+          <circle class="fg3" cx="90" cy="90" r="42" filter="url(#neonGlow)" />
+        </g>
+      </svg>
+    </section>
+
+    <section class="metrics-panel grid-fine">
+      <h2 class="glow-text tyuuouyose">METRICS</h2>
+      <div class="gauge"><label>CPU LOAD</label>
+        <div class="bar">
+          <div class="fill" id="gauge-cpu"></div>
+        </div><span id="val-cpu">45%</span>
+      </div>
+      <div class="gauge"><label>TEMPERATURE</label>
+        <div class="bar">
+          <div class="fill" id="gauge-temp"></div>
+        </div><span id="val-temp">54°C</span>
+      </div>
+      <div class="gauge"><label>MEMORY USAGE</label>
+        <div class="bar">
+          <div class="fill" id="gauge-mem"></div>
+        </div><span id="val-mem">41%</span>
+      </div>
+      <div class="gauge"><label>THREAT LEVEL</label>
+        <div class="bar">
+          <div class="fill" id="gauge-threat"></div>
+        </div><span id="val-threat">17%</span>
+      </div>
+      <div class="gauge"><label>DISK USAGE</label>
+        <div class="bar">
+          <div class="fill" id="gauge-disk"></div>
+        </div><span id="val-disk">67%</span>
+      </div>
+      <button class="img-change" onclick="changeBackground()">
+        <img src="img/スクリーンショット 2025-11-03 223037.png" alt="img" />
+      </button>
+      <button class="img-change-2" onclick="greenBackground()">
+        <img src="img/スクリーンショット 2025-11-03 223117.png" alt="img" />
+      </button>
+      <button class="ghost-button" onclick="defaultsBackground()"></button>
+    </section>
+
+    <section class="radar-panel grid-medium" id="radar-panel">
+      
+      <svg id="radar-svg" width="200" height="200" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="90" stroke="#00ffff" stroke-width="2" fill="none" />
+        <circle cx="100" cy="100" r="60" stroke="#00ffff" stroke-width="1" fill="none" />
+        <circle cx="100" cy="100" r="30" stroke="#00ffff" stroke-width="1" fill="none" />
+        <circle id="target1" cx="140" cy="60" r="6" fill="#00ffcc" />
+        <circle id="target2" cx="60" cy="140" r="6" fill="#00ffcc" />
+        <g id="scan-line-group">
+          <line x1="100" y1="100" x2="100" y2="10" stroke="#00ffff" stroke-width="1" />
+        </g>
+        <circle id="target-dot" cx="140" cy="60" r="6" fill="#00ffcc" />
+      </svg>
+      <p>SCAN RANGE: 250m</p>
+      <p>SIGNAL STRENGTH: 82%</p>
+      <p>TRACKING MODE: AUTO</p>
+    </section>
+
+    <section class="threat-matrix-panel grid-coarse">
+      <h2>
+        <div class="glow-red">THREAT MATRIX</div>
+      </h2>
+      <ul id="threat-list"></ul>
+    </section>
+
+    <section class="map-panel">
+      <div class="section worldmap-section">
+        <div id="world-map-section">
+          <div class="map-container">
+            <div class="map-wrapper">
+              <img id="world-map-image" src="img/地球のモニター映像.png" alt="世界地図">
+            </div>
+          </div>
+          <div class="map-controls">
+            <button onclick="prevMap()">
+              <div class="glow-text">⟵ PREV</div>
+            </button>
+            <button onclick="nextMap()">
+              <div class="glow-text">NEXT ⟶</div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="traffic-panel">
+      <h2 class="tyuuouyose">
+        <div class="glow-text">TRAFFIC ANALYSIS</div>
+      </h2>
+      <canvas id="trafficChart"></canvas>
+    </section>
+
+    <section class="log-panel grid-fine">
+      
+      <h2>
+        <div class="glow-text">EVENT LOG</div>
+      </h2>
+      <ul id="event-log"></ul>
+    </section>
+
+    <section class="status-panel grid-coarse">
+      
+      <h2>
+        <div class="glow-text">SYSTEM STATUS</div>
+      </h2>
+      <p>CPU USAGE: <span id="cpu-usage">35%</span></p>
+      <p>MEMORY CONSUMPTION: <span id="memory-usage">3.2 / 16 GB</span></p>
+      <p>BIOS VERSION: <span id="bios-version">A17X-3.4.2</span></p>
+      <p>RELEASE DATE: <span id="bios-date">2025-03-12</span></p>
+      <p>MANUFACTURER: <span id="bios-maker">CyberCore Systems</span></p>
+    </section>
+
+    <form id="manualForm">
+      <input type="text" id="manualLat" placeholder="Latitude">
+      <input type="text" id="manualLon" placeholder="Longitude">
+      <button type="submit">GET DATA</button>
+    </form>
+
+    <p style="color: #00ffe0; font-size: 0.9em;">
+      Weather data provided by <a href="https://open-meteo.com/" target="_blank"
+        style="color: #00ffe0; text-decoration: underline;">Open-Meteo</a>
+    </p>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+  </div>
+</body>
+
+</html>
