@@ -5,7 +5,7 @@ body {
   background-image: url('img/cyber-background.png');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   background-color: #000;
   font-family: 'Orbitron', sans-serif;
   overflow-x: hidden;
@@ -152,7 +152,7 @@ h2 {
 
 .threat-matrix-panel {
   padding: 20px;
-  min-width: 400px;
+  min-width: 300px;
 }
 
 #threat-list {
@@ -179,14 +179,6 @@ h2 {
   font-weight: bold;
 }
 
-.top-section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 40px;
-  padding: 20px;
-}
-
 .metrics-panel {
   flex: 1;
   color: #0ff;
@@ -196,7 +188,10 @@ h2 {
 }
 
 .status-panel {
-  min-width: 360px;
+  background-image: url('img/cyber-tag.svg'); /* ← SVGファイル名をここに */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .gauge {
@@ -334,17 +329,6 @@ h2 {
   padding: 16px;
   min-width: 300px;
   flex: 1;
-}
-
-.status-panel {
-  background-color: rgba(0, 0, 0, 0.4);
-  /* 半透明の黒 */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  /* 薄い枠線で浮かせる */
-  padding: 6px;
-  backdrop-filter: blur(2px);
-  /* 背景を軽くぼかす */
-  position: relative;
 }
 
 section {
@@ -646,4 +630,8 @@ section {
 
 .tyuuouyose{
   text-align: center;
+}
+
+.log-panel{
+  min-width: 300px;
 }
