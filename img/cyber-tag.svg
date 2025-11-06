@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   viewBox="0 0 900 900" preserveAspectRatio="none"
+   viewBox="0 0 900 900"
+   preserveAspectRatio="none"
    version="1.1"
    xml:space="preserve"
    id="SVGRoot"
    inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
-   sodipodi:docname="描画.svg"
+   sodipodi:docname="cyber-tag.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"><defs
    id="defs2"><inkscape:perspective
-     sodipodi:type="inkscape:persp3d"
-     inkscape:vp_x="0 : 450 : 1"
-     inkscape:vp_y="0 : 1000 : 0"
-     inkscape:vp_z="900 : 450 : 1"
-     inkscape:persp3d-origin="450 : 300 : 1"
-     id="perspective3" />
+   sodipodi:type="inkscape:persp3d"
+   inkscape:vp_x="0 : 450 : 1"
+   inkscape:vp_y="0 : 1000 : 0"
+   inkscape:vp_z="900 : 450 : 1"
+   inkscape:persp3d-origin="450 : 300 : 1"
+   id="perspective3" />
      </defs>
   <sodipodi:namedview
    pagecolor="#a9a9a9"
@@ -61,7 +62,7 @@ g.prefab path {
    id="path2" />
  </g>
 <rect
-   style="fill:#00aad4;stroke-width:0.999185"
+   style="fill:#00ffff;stroke-width:0.999185"
    id="rect2"
    width="454.07407"
    height="13.333333"
@@ -109,15 +110,15 @@ g.prefab path {
      inkscape:box3dsidetype="3"
      d="M 337.03704,342.38929 450.37037,306.20372 V 662.26223 L 337.03704,608.84756 Z"
      points="450.37037,306.20372 450.37037,662.26223 337.03704,608.84756 337.03704,342.38929 " /></g><rect
-   style="fill:#00aad4;stroke-width:1.01283"
+   style="fill:#00ffff;stroke-width:1.01283"
    id="rect8"
    width="205.92592"
    height="23.703703"
    x="693.33331"
    y="11.111108" /><path
-   style="fill:#00aad4"
+   style="fill:#00ffff"
    d="m 654.81482,15.555555 17.77777,19.25926 h 29.62963 l -0.74074,-23.7037 z"
    id="path9" /><path
-   style="fill:#00aad4"
+   style="fill:#00ffff"
    d="M 0.74074333,802.22222 1.4814833,901.48148 H 100 Z"
    id="path10" /></svg>

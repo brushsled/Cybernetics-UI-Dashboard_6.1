@@ -29,6 +29,7 @@ body {
   box-sizing: border-box;
   flex: 1;
   padding: 3px;
+  max-height: 400px;
 }
 
 .glow {
@@ -152,7 +153,9 @@ h2 {
 
 .threat-matrix-panel {
   padding: 20px;
-  min-width: 300px;
+  min-width: 250px;
+  max-width: 300px;
+  max-height: 400px;
 }
 
 #threat-list {
@@ -185,6 +188,7 @@ h2 {
   font-family: 'Orbitron', sans-serif;
   min-width: 180px;
   max-width: 300px;
+  max-height: 400px;
 }
 
 .status-panel {
@@ -192,6 +196,8 @@ h2 {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  max-height: 400px;
+  width: 350px;
 }
 
 .gauge {
@@ -232,7 +238,7 @@ h2 {
   flex: 0 0 220px;
   text-align: center;
   min-width: 250px;
-  flex: 1;
+  max-height: 400px;
 }
 
 /* グリッド密度別スタイル */
@@ -327,7 +333,7 @@ h2 {
 .map-panel {
   grid-area: map;
   padding: 16px;
-  min-width: 300px;
+  min-width: 350px;
   flex: 1;
 }
 
@@ -634,6 +640,7 @@ section {
 
 .log-panel{
   min-width: 300px;
+  max-height: 400px;
 }
 
 canvas {
@@ -648,4 +655,13 @@ canvas {
   padding: 20px;
   background-color: transparent;
   margin-bottom: 40px;
+  max-height: 400px;
+}
+
+.text-layout-1 {
+  padding-left: 20px;
+}
+
+.tizu {
+  max-height: 400px;
 }
