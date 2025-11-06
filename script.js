@@ -206,6 +206,10 @@ document.getElementById("toggleMode").addEventListener("click", function () {
 // 初期化：グラフ描画
 function initChart() {
   const ctx = document.getElementById('trafficChart').getContext('2d');
+  // すでにグラフが存在していたら破棄
+  if (window.trafficChart && typeof window.trafficChart.destroy === 'function') {
+    window.trafficChart.destroy();
+  }
   window.trafficChart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -285,7 +289,6 @@ function addLogEntry() {
   const li = document.createElement('li');
   li.textContent = `${timestamp} ${message}`;
   logContainer.appendChild(li);
-
   if (logContainer.children.length > 50) {
     logContainer.removeChild(logContainer.firstChild);
   }
@@ -295,6 +298,17 @@ function addLogEntry() {
   // レーダー反応
   const radarPanel = document.getElementById('radar-panel');
   const targetDot = document.getElementById('target-dot');
+  if (message.includes("Critical breach detected")) {
+    radarPanel.classList.add("radar-alert");
+    targetDot.classList.add("blinking");
+    setTimeout(() => {
+      radarPanel.classList.remove("radar-alert");
+      targetDot.classList.remove("blinking");
+    }, 5000);
+
+    // Threat Matrix に重大な脅威を追加
+    addThreat("ID#" + Math.floor(Math.random() * 1000), "System Breach", "High");
+  }
   if (message.includes("Anomaly detected")) {
     radarPanel.classList.add("radar-alert");
     targetDot.classList.add("blinking");
@@ -346,6 +360,10 @@ setInterval(() => {
 
 // 初期化とログ更新開始
 document.addEventListener('DOMContentLoaded', () => {
+  // すでにグラフが存在していたら破棄
+  if (window.trafficChart && typeof window.trafficChart.destroy === 'function') {
+    window.trafficChart.destroy();
+  }
   initChart();
   setInterval(addLogEntry, 3000);
 });
@@ -411,22 +429,14 @@ function updateMetricsPanel() {
 
 // 初期化時に追加
 document.addEventListener('DOMContentLoaded', () => {
+  // すでにグラフが存在していたら破棄
+  if (window.trafficChart && typeof window.trafficChart.destroy === 'function') {
+    window.trafficChart.destroy();
+  }
   initChart();
   setInterval(addLogEntry, 3000);
   setInterval(updateSystemStatus, 5000);
   setInterval(updateMetricsPanel, 3000); // ← これが必要
-
-  if (message.includes("Critical breach detected")) {
-    radarPanel.classList.add("radar-alert");
-    targetDot.classList.add("blinking");
-    setTimeout(() => {
-      radarPanel.classList.remove("radar-alert");
-      targetDot.classList.remove("blinking");
-    }, 5000);
-
-    // Threat Matrix に重大な脅威を追加
-    addThreat("ID#" + Math.floor(Math.random() * 1000), "System Breach", "High");
-  }
 });
 const mapImages = [
   "img/地球のモニター映像.png",
@@ -462,7 +472,10 @@ function prevMap() {
 
 // メインの初期化処理に統合
 document.addEventListener('DOMContentLoaded', () => {
-  // 既存の初期化処理
+  // すでにグラフが存在していたら破棄
+  if (window.trafficChart && typeof window.trafficChart.destroy === 'function') {
+    window.trafficChart.destroy();
+  }
   initChart();
   setInterval(addLogEntry, 3000);
   setInterval(updateSystemStatus, 5000);

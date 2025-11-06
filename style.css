@@ -635,3 +635,17 @@ section {
 .log-panel{
   min-width: 300px;
 }
+
+canvas {
+  display: block;
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+  margin: 20px auto;
+}
+
+.traffic-panel {
+  padding: 20px;
+  background-color: transparent;
+  margin-bottom: 40px;
+}
